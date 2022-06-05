@@ -42,12 +42,35 @@ namespace ConsoleApp18
             }
             pr[pr.Length - 1] = produkt;
         }
-        static void printprodukts( produkt[] pr)
+        static produkt creteprodact ()
         {
+            produkt pur;
+            Console.WriteLine("введите название продукта");
+            pur.Name = Console.ReadLine();
 
+            Console.WriteLine("введите поставщика");
+            pur.Contracton = Console.ReadLine();
+
+            Console.WriteLine("введите дату");
+            pur.DeliveryDate = DateTime.Parse( Console.ReadLine());
+
+            Console.WriteLine("введите срок годности");
+            pur.SelfLifeDays = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("введите остаток продукта");
+            pur.Balanse = int.Parse(Console.ReadLine());
+
+            pur.Id = 0;
+
+            return pur;
+        }
+        static void printprodukts( produkt pr)
+        {
+            Console.WriteLine("{0, -3}{1,-15}{2,-15}{3, -12}{4, -4}{5, -4}", pr.Id, pr.Name, pr.Contracton, pr.DeliveryDate.Date, pr.SelfLifeDays, pr.Balanse);
         }
         static void printallprodukts(produkt[] pr)
         {
+            Console.WriteLine("{0, -3}{1,-15}{2,-15}{3, -12}{4, -4}{5, -4}", "ИД","название","поставщик","дата доставки.","сг","ост");
             for (int i = 0; i < pr.Length; i++)
             {
                 printprodukts(pr[i]);
@@ -57,13 +80,13 @@ namespace ConsoleApp18
         }
         static void Main(string[] args)
         {
-            produkt sv;
-            sv.Name = "sirius";
-            
+            produkt[] pr = null;
 
-           
+            InsertNewProdact(ref pr, creteprodact());
+            InsertNewProdact(ref pr, creteprodact());
+            printallprodukts(pr);
+            Console.ReadKey();
 
-            Console.WriteLine(sv.Name);
         }
     }
 }

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{02D02473-2E8F-4843-A9D9-0105408F0F58}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp18</RootNamespace>
-    <AssemblyName>ConsoleApp18</AssemblyName>
+    <RootNamespace>дм</RootNamespace>
+    <AssemblyName>дм</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
