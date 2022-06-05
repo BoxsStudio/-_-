@@ -8,8 +8,8 @@ namespace ConsoleApp18
 {
     internal class Program
     {
-        static int current_id = 0;
-        struct produkt
+        static int currentProductId = 0;
+        struct Produkt
         {
             public int Id;
             public string Name;
@@ -19,72 +19,73 @@ namespace ConsoleApp18
             public int Balanse;
         }
 
-        static void ResizeArray(ref produkt[] pr, int newLength)
+        static void ResizeArray(ref Produkt[] products, int newLength)
         {
-            int mitLength = newLength > pr.Length ? pr.Length : newLength;
-            produkt[] newArray = new produkt[mitLength];
-            for (int i = 0; i < mitLength; i++)
+            Produkt[] newArray = new Produkt[products.Length+1];
+            for (int i = 0; i < products.Length; i++)
             {
-                newArray[i] = pr[i];
+                newArray[i] = products[i];
             }
-            pr = newArray;
+            products = newArray;
         }
-        static void newprodukts(ref produkt[] pr, produkt produkt)
+        static void InsertNewProdukt(ref Produkt[] products, Produkt produkt)
         {
-            if (pr == null)
+            if (products == null)
             {
-                pr = new produkt[1];
-                pr[0] = produkt;
+                products = new Produkt[1];
+                products[0] = produkt;
             }
             else
             {
-                ResizeArray(ref pr, pr.Length + 1);
+                ResizeArray(ref products, products.Length + 1);
+                products[products.Length - 1] = produkt;
             }
-            pr[pr.Length - 1] = produkt;
         }
-        static produkt creteprodact ()
+        static Produkt CreteProdukt ()
         {
-            produkt pur;
+            Produkt produkt;
             Console.WriteLine("введите название продукта");
-            pur.Name = Console.ReadLine();
+            produkt.Name = Console.ReadLine();
 
             Console.WriteLine("введите поставщика");
-            pur.Contracton = Console.ReadLine();
+            produkt.Contracton = Console.ReadLine();
 
             Console.WriteLine("введите дату");
-            pur.DeliveryDate = DateTime.Parse( Console.ReadLine());
+            produkt.DeliveryDate = DateTime.Parse( Console.ReadLine());
 
             Console.WriteLine("введите срок годности");
-            pur.SelfLifeDays = int.Parse(Console.ReadLine());
+            produkt.SelfLifeDays = int.Parse(Console.ReadLine());
 
             Console.WriteLine("введите остаток продукта");
-            pur.Balanse = int.Parse(Console.ReadLine());
+            produkt.Balanse = int.Parse(Console.ReadLine());
 
-            pur.Id = 0;
+            currentProductId++;
+            produkt.Id = currentProductId;
 
-            return pur;
+            return produkt;
         }
-        static void printprodukts( produkt pr)
+        static void PrintProdukt(Produkt produkt)
         {
-            Console.WriteLine("{0, -3}{1,-15}{2,-15}{3, -12}{4, -4}{5, -4}", pr.Id, pr.Name, pr.Contracton, pr.DeliveryDate.Date, pr.SelfLifeDays, pr.Balanse);
+            Console.WriteLine("{0, -3}{1,-15}{2,-15}{3, -12}{4, -4}{5, -4}", produkt.Id, produkt.Name, produkt.Contracton, produkt.DeliveryDate.Date.ToShortDateString(), produkt.SelfLifeDays, produkt.Balanse);
         }
-        static void printallprodukts(produkt[] pr)
+        static void PrintAllProdukts(Produkt[] produkt)
         {
             Console.WriteLine("{0, -3}{1,-15}{2,-15}{3, -12}{4, -4}{5, -4}", "ИД","название","поставщик","дата доставки.","сг","ост");
-            for (int i = 0; i < pr.Length; i++)
+            for (int i = 0; i < produkt.Length; i++)
             {
-                printprodukts(pr[i]);
+                PrintProdukt(produkt[i]);
 
             }
             Console.WriteLine("-----------------------------------------");
         }
         static void Main(string[] args)
         {
-            produkt[] pr = null;
+            Produkt[] produks = null;
 
-            InsertNewProdact(ref pr, creteprodact());
-            InsertNewProdact(ref pr, creteprodact());
-            printallprodukts(pr);
+            InsertNewProdukt(ref produks, CreteProdukt());
+            InsertNewProdukt(ref produks, CreteProdukt());
+
+            PrintAllProdukts(produks);
             Console.ReadKey();
 
         }
